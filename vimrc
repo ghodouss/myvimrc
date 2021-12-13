@@ -19,6 +19,9 @@ Plug 'neoclide/coc-java'
 Plug 'neoclide/coc-pairs'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
+Plug 'NLKNguyen/papercolor-theme'
+Plug 'arcticicestudio/nord-vim'
+Plug 'lifepillar/vim-solarized8'
 call plug#end()
 
 " All of your Plugins must be added before the following line
@@ -41,14 +44,16 @@ au BufRead,BufNewFile *.sbt set filetype=scala
 runtime custom/coc.vim 
 
 " UI Config ----------------------------------------------------
-colorscheme badwolf         " awesome colorscheme
+colorscheme solarized8_high
+set background=light
 set number              " show line numbers
 set showcmd             " show command in bottom bar
 set cursorline          " highlight current line
 filetype indent on      " load filetype-specific indent files
 set wildmenu            " visual autocomplete for command menu
 set showmatch           " highlight matching [{()}]
-
+set laststatus=2
+set statusline+=%F
 
 " Syntax ----------------------------------------------
 syntax enable           " enable syntax processing
@@ -63,6 +68,7 @@ set shiftwidth=4
 set expandtab       " tabs are spaces
 
 autocmd FileType c setlocal shiftwidth=2 tabstop=2 softtabstop=2
+autocmd FileType cpp setlocal shiftwidth=2 tabstop=2 softtabstop=2
 autocmd FileType h setlocal shiftwidth=2 tabstop=2 softtabstop=2
 autocmd FileType sql setlocal shiftwidth=2 tabstop=2 softtabstop=2
 autocmd FileType java setlocal shiftwidth=2 tabstop=2 softtabstop=2
@@ -140,6 +146,10 @@ let g:ale_lint_on_enter = 0
 let g:ale_lint_on_save = 1
 let g:ale_lint_on_insert_leave = 0
 let g:ale_python_auto_pipenv = 1
+let g:ale_sign_error = '●'
+let g:ale_sign_warning = '.'
+let g:ale_python_flake8_use_global = 0
+let g:ale_linters = {'python': ['pylint']}
 
 " Jedi Vim Config ----------------------------------------------------
 let g:jedi#use_tabs_not_buffers = 0
@@ -153,6 +163,8 @@ let g:jedi#completions_command = "<C-Space>"
 let g:jedi#rename_command = "<leader>r"
 let g:jedi#usages_command = "<leader>a"
 let g:SuperTabDefaultCompletionType = "context"
+let g:syntastic_enable_highlighting = 0
+
 
 " Copy/Paste maps --------------------------------------------------------
 nnoremap <C-y> "+y
