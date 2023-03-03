@@ -22,6 +22,11 @@ Plug 'tpope/vim-rhubarb'
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'arcticicestudio/nord-vim'
 Plug 'lifepillar/vim-solarized8'
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }}
+Plug 'preservim/vimux'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'christoomey/vim-tmux-navigator'
 call plug#end()
 
 " All of your Plugins must be added before the following line
@@ -46,7 +51,7 @@ runtime custom/coc.vim
 " UI Config ----------------------------------------------------
 colorscheme solarized8_high
 set background=light
-set number              " show line numbers
+set number" show line numbers
 set showcmd             " show command in bottom bar
 set cursorline          " highlight current line
 filetype indent on      " load filetype-specific indent files
@@ -149,7 +154,7 @@ let g:ale_python_auto_pipenv = 1
 let g:ale_sign_error = '●'
 let g:ale_sign_warning = '.'
 let g:ale_python_flake8_use_global = 0
-let g:ale_linters = {'python': ['pylint']}
+let g:ale_linters = {'python': ['pylint', 'mypy']}
 
 " Jedi Vim Config ----------------------------------------------------
 let g:jedi#use_tabs_not_buffers = 0
@@ -173,5 +178,27 @@ nnoremap <C-p> "+gP
 vnoremap <C-p> "+gP
 
 " File Search Maps --------------------------------------------------------
-nnoremap <C-f> :Files<CR>
-nnoremap <C-h> :Buffers<CR>
+nnoremap <C-g> :Files<CR>
+nnoremap <C-f> :GitFiles<CR>
+nnoremap <Leader>h :Buffers<CR>
+
+" Vimux config--------------------------------------------------------
+let g:VimuxOrientation = "v"
+map <Leader>vv :VimuxPromptCommand<CR>
+map <Leader>vl :VimuxRunLastCommand<CR>
+
+" Airline config--------------------------------------------------------
+let g:airline_theme='badwolf'
+
+
+let g:tmux_navigator_no_mappings = 1
+noremap <silent> <C-l> :<C-U>TmuxNavigateRight<cr>
+noremap <silent> <C-j> :<C-U>TmuxNavigateDown<cr>
+noremap <silent> <C-k> :<C-U>TmuxNavigateUp<cr>
+noremap <silent> <C-h> :<C-U>TmuxNavigateLeft<cr>
+
+augroup BgHighlight
+    autocmd!
+    autocmd WinEnter * set number 
+    autocmd WinLeave * set nonumber 
+augroup END
